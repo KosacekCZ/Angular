@@ -1,0 +1,17 @@
+<div id="blog_container">
+  <h1>Blog</h1>
+  <hr>
+
+  <form id="blog_component" (ngSubmit)="submit()" *ngIf="editedPost">
+    <input [(ngModel)]="editedHeader" name="header" class="bl_header" placeholder="Header..."><br>
+    <textarea [(ngModel)]="editedContent" name="content" class="bl_content" placeholder="Text..."></textarea><br>
+    <button>Post!</button>
+  </form>
+  <div id="blog_posts" *ngFor="let post of posts" (click)="editedPost = post; editedHeader = post.header; editedContent = post.content ">
+    <h3>{{post.header}}</h3>
+    <p>{{post.content}}</p>
+</div>
+  <button (click)="createPost()">Create new post!</button>
+
+</div>
+

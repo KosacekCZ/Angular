@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+#blog_container {
+  margin: 0px 10px;
+  box-shadow: 6px 6px 4px #737373;
+  height: 100vh;
+}
+#blog_container hr {
+  margin: 5px 10px;
+}
+
+#blog_container h1 {
+  font-family: 'Open Sans', sans-serif;
+  margin: 5px;
+}
+
+#blog_component {
+padding: 5px 10px;
+}
+
+#blog_component .bl_header {
+
+}
+#blog_component .bl_content {
+  margin: 5px 0px;
+  height: 80px;
+  width: 300px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+#blog_posts {
+
+}
+
+#blog_posts h3 {
+
+}
+
+#blog_posts p {
+
+}
+
+#blog_posts :hover {
+cursor: pointer;
+}
