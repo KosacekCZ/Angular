@@ -5,8 +5,11 @@ import {split} from 'ts-node';
   name: 'ExcreptPipe'
 })
 export class ExcreptPipe implements PipeTransform {
-
   transform(value: string, times: number = 6, ending: string = '..'): string {
-    return value.substring(0, times) + ending;
+    if (value.length <= times) {
+      return value.substring(0, times);
+    } else {
+      return value.substring(0, times - ending.length) + ending;
+    }
   }
 }

@@ -9,8 +9,8 @@
   </form>
 
   <div id="blog_posts" *ngFor="let post of renderedPosts" (click)="editedPost = post; editedHeader = post.header; editedContent = post.content ">
-    <h3>{{post.header | ExcreptPipe: 6 : "..."}}</h3>
-    <p>{{post.content | ExcreptPipe: 40 : "..."}}</p>
+    <h3>{{post.header | ExcreptPipe: 50 : "..."}}</h3>
+    <p>{{post.content}}</p>
 </div>
   <button (click)="createPost()">Create new post!</button>
 
