@@ -8,6 +8,8 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import {FormsModule} from '@angular/forms';
 import { BlogComponent } from './blog/blog.component';
+import { CharLimitPipe } from './char-limit.pipe';
+import {ExcreptPipe} from './excrept.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { BlogComponent } from './blog/blog.component';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    BlogComponent
+    BlogComponent,
+    ExcreptPipe,
   ],
   imports: [
     BrowserModule,

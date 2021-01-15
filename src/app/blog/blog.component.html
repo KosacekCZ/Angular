@@ -7,9 +7,10 @@
     <textarea [(ngModel)]="editedContent" name="content" class="bl_content" placeholder="Text..."></textarea><br>
     <button>Post!</button>
   </form>
-  <div id="blog_posts" *ngFor="let post of posts" (click)="editedPost = post; editedHeader = post.header; editedContent = post.content ">
-    <h3>{{post.header}}</h3>
-    <p>{{post.content}}</p>
+
+  <div id="blog_posts" *ngFor="let post of renderedPosts" (click)="editedPost = post; editedHeader = post.header; editedContent = post.content ">
+    <h3>{{post.header | ExcreptPipe: 6 : "..."}}</h3>
+    <p>{{post.content | ExcreptPipe: 40 : "..."}}</p>
 </div>
   <button (click)="createPost()">Create new post!</button>
 

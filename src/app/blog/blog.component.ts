@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-
-interface BlogPost {
-  header: string;
-  content: string;
-}
+import {BlogPost, PostServiceService} from '../post-service.service';
+import {ExcreptPipe} from '../excrept.pipe';
 
 @Component({
   selector: 'app-blog',
@@ -12,42 +9,23 @@ interface BlogPost {
 })
 export class BlogComponent {
 
-  posts: BlogPost[] = [
-    {header: 'Title 1', content: 'text 1'},
-  ];
+  renderedPosts: BlogPost[] = [];
 
   editedHeader = '';
   editedContent = '';
   editedPost: BlogPost | undefined = undefined;
 
-  // tslint:disable-next-line:typedef
-  createPost() {
-    this.posts.push({header: 'Title 1', content: 'text 1'}, );
+  constructor(public postService: PostServiceService) {
+  }
+
+  createPost(): void {
+    this.renderedPosts.push({header: 'Title 1', content: 'text 1'}, );
   }
 
   submit(): void {
-    if (this.editedPost) {
-      this.editedPost.header = this.editedHeader;
-      this.editedPost.content = this.editedContent;
+    if (this.editedPost !== undefined) {
+      this.postService.submit(this.editedPost, this.editedHeader, this.editedContent);
       this.editedPost = undefined;
     }
-  }
-}
-
-
-export class Post {
-  header: string;
-  content: string;
-
-  // tslint:disable-next-line:typedef
-  constructor(header: string, content: string) {
-    this.header = header;
-    this.content = content;
-  }
-
-  // tslint:disable-next-line:typedef
-  screatePost() {
-    // tslint:disable-next-line:no-unused-expression
-    new Post(this.header, this.content);
   }
 }
