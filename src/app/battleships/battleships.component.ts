@@ -14,12 +14,15 @@ export class BattleshipsComponent implements OnInit {
   public y: any;
   score = 0;
   steps = 0;
+  spawnedShips = 0;
+  win = false;
 
   rint(max: number): number {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
   fieldsFill(): void {
+    this.win = false;
     this.score = 0;
     this.steps = 0;
     let i: number;
@@ -43,28 +46,46 @@ export class BattleshipsComponent implements OnInit {
     for (i = 0; i < 10; i++) {
       this.gameField[this.rint(10)][this.rint(10)] = 'boat';
     }
+    let j: number;
+    for (i = 0; i < this.size; i++) {
+      for (j = 0; j < this.size; j++) {
+        if (this.gameField[i][j] === 'boat') {
+          this.spawnedShips++;
+        }
+      }
+    }
   }
 
   reveal(x: number, y: number): void {
     if (this.cField[x][y] !== 'boat' && this.cField[x][y] !== 'water') {
       this.steps++;
     }
-    if (this.gameField[x][y] === 'boat' && this.cField[x][y]  !== 'boat') {
+    if (this.gameField[x][y] === 'boat' && this.cField[x][y] !== 'boat') {
       this.score++;
     }
     this.cField[x][y] = this.gameField[x][y];
     console.log(this.cField[x][y] + ' ; ' + this.gameField[x][y]);
+    this.check();
+  }
+
+  check(): void {
+    if (this.spawnedShips === this.score) {
+      this.win = true;
+    }
   }
 
   debug(): void {
     console.log(this.cField);
     console.log(this.gameField);
+    console.log(this.spawnedShips);
   }
 
   constructor() {
   }
 
-  ngOnInit(): void {
+  ngOnInit()
+    :
+    void {
   }
 
 }
