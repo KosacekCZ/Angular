@@ -1,0 +1,22 @@
+<div id="center-block">
+  <form #formular="ngForm">
+
+    <input placeholder="Jméno:" [(ngModel)]="jmeno" name="jmeno" type="text" required minlength="2" maxlength="15" #jmenoVal="ngModel" >
+
+    <ng-container *ngIf="jmenoVal.touched">
+      <p class="errorHint" *ngIf="jmenoVal.errors?.minlength">Zadané jméno je příliš krátké!</p>
+      <p class="errorHint" *ngIf="jmenoVal.errors?.maxlength">Zadané jméno je příliš dlouhé!</p>
+      <p class="errorHint" *ngIf="jmenoVal.errors?.required">Pole nesmí být prázdné!</p>
+    </ng-container>
+    <br>
+
+    <input placeholder="Heslo..." [(ngModel)]="heslo" type="password" name="heslo" required minlength="10" maxlength="40" #hesloVal = "ngModel">
+    <ng-container *ngIf="hesloVal.touched">
+      <p class="errorHint" *ngIf="hesloVal.errors?.minlength">Zadané heslo je příliš krátké!</p>
+      <p class="errorHint" *ngIf="hesloVal.errors?.maxlength">Zadané heslo je příliš dlouhé!</p>
+      <p class="errorHint" *ngIf="hesloVal.errors?.required">Pole nesmí být prázdné!</p>
+    </ng-container>
+    <br>
+    <button [disabled]="formular.invalid" (click)="submit()">Regisotrovoroat!</button>
+  </form>
+</div>

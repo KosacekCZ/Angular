@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BlogPost, PostServiceService} from '../post-service.service';
+import {BlogPost, PostServiceService} from '../post-service.service'
 import {ExcreptPipe} from '../excrept.pipe';
 
 @Component({
@@ -13,7 +13,7 @@ export class BlogComponent {
 
   editedHeader = '';
   editedContent = '';
-  editedPost: BlogPost | undefined = undefined;
+  editPost: BlogPost | undefined = undefined;
 
   constructor(public postService: PostServiceService) {
   }
@@ -23,9 +23,9 @@ export class BlogComponent {
   }
 
   submit(): void {
-    if (this.editedPost !== undefined) {
-      this.postService.submit(this.editedPost, this.editedHeader, this.editedContent);
-      this.editedPost = undefined;
+    if (this.editPost !== undefined) {
+      this.postService.submit(this.editPost, this.editedHeader, this.editedContent);
+      this.editPost = undefined;
     }
   }
 }

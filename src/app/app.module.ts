@@ -10,6 +10,9 @@ import {FormsModule} from '@angular/forms';
 import { BlogComponent } from './blog/blog.component';
 import { CharLimitPipe } from './char-limit.pipe';
 import {ExcreptPipe} from './excrept.pipe';
+import { HeaderComponent } from './header/header.component';
+import { DirektivaDirective } from './direktiva.directive';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import {ExcreptPipe} from './excrept.pipe';
     ContactComponent,
     BlogComponent,
     ExcreptPipe,
+    HeaderComponent,
+    DirektivaDirective,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

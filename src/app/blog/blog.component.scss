@@ -33,13 +33,30 @@ padding: 5px 10px;
 }
 
 #blog_posts h3 {
-
+  font-family: 'Open Sans', sans-serif;
+  font-size: 140%;
 }
 
 #blog_posts p {
-
+  font-family: 'Open Sans', sans-serif;
+  font-size: 120%;
 }
 
 #blog_posts :hover {
 cursor: pointer;
+}
+
+#blog_edit_form {
+position: relative;
+  top: 100%;
+  background: #d9d9d9;
+  box-shadow: 5px 5px 10px #555555;
+  font-family: 'Open Sans', sans-serif;
+  margin: 40px 0px;
+}
+
+#blog_post_area {
+  position: absolute;
+  margin: auto;
+  overflow: visible;
 }

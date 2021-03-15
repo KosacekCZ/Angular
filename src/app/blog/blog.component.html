@@ -1,18 +1,23 @@
 <div id="blog_container">
   <h1>Blog</h1>
   <hr>
+<div id="blog_post_area">
+  <div id = "blog_edit_form">
+    <form id="blog_component" (ngSubmit)="submit()" *ngIf="editPost">
+      <input [(ngModel)]="editedHeader" name="header" class="bl_header" placeholder="Header..."><br>
+      <textarea [(ngModel)]="editedContent" name="content" class="bl_content" placeholder="Text..."></textarea><br>
+      <button>Post!</button>
+    </form>
+  </div>
 
-  <form id="blog_component" (ngSubmit)="submit()" *ngIf="editedPost">
-    <input [(ngModel)]="editedHeader" name="header" class="bl_header" placeholder="Header..."><br>
-    <textarea [(ngModel)]="editedContent" name="content" class="bl_content" placeholder="Text..."></textarea><br>
-    <button>Post!</button>
-  </form>
 
-  <div id="blog_posts" *ngFor="let post of renderedPosts" (click)="editedPost = post; editedHeader = post.header; editedContent = post.content ">
+  <div id="blog_posts" *ngFor="let post of renderedPosts" (click)="editPost = post; editedHeader = post.header; editedContent = post.content ">
     <h3>{{post.header | ExcreptPipe: 50 : "..."}}</h3>
     <p>{{post.content}}</p>
-</div>
+  </div>
   <button (click)="createPost()">Create new post!</button>
 
 </div>
+</div>
+
 
