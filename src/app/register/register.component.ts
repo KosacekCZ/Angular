@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -9,19 +12,22 @@ export class RegisterComponent implements OnInit {
   jmeno: any;
   nameState: any;
   heslo: any;
-  // @ts-ignore
-  shortname: boolean;
-
+  private httpClient: HttpClient;
 
   submit(): void {
-// tady to asi pošle ty věci někam do arraylistu
+    this.httpClient.post('https://webhook.site/28b8eb5a-5212-4f22-b43a-903ca2ba0c7e', {username: this.jmeno, password: this.heslo})
+      .subscribe
+      (
+        () => alert('Success'),
+        () => alert('Failed')
+      );
   }
 
-
-  log(): void {
-    console.log(this.jmeno + ' ' + this.heslo);
-  }
   ngOnInit(): void {
+  }
+
+  constructor(httpClient: HttpClient) {
+    this.httpClient = httpClient;
   }
 }
 

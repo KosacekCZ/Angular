@@ -13,6 +13,7 @@ import {ExcreptPipe} from './excrept.pipe';
 import { HeaderComponent } from './header/header.component';
 import { DirektivaDirective } from './direktiva.directive';
 import { RegisterComponent } from './register/register.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
