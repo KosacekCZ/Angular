@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { DirektivaDirective } from './direktiva.directive';
 import { RegisterComponent } from './register/register.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { BattleshipsComponent } from './battleships/battleships.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     HeaderComponent,
     DirektivaDirective,
     RegisterComponent,
+    BattleshipsComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,9 @@
     <li><a routerLink="blog" *ngIf="searchInput.includes('blog')||searchInput===''">Blog</a></li>
     <li><a routerLink="about" *ngIf="searchInput.includes('about')||searchInput===''">About us</a></li>
     <li><a routerLink="contact" *ngIf="searchInput.includes('contact')||searchInput===''">Contact us</a></li>
-    <li class="navbar_mid"><a>...</a></li>
+    <li><a routerLink="battleships" *ngIf="searchInput.includes('battleships')||searchInput===''">Battleships</a></li>
+    <li><a routerLink="register" *ngIf="searchInput.includes('register')||searchInput===''">Register</a></li>
+    <li class="navbar_mid"></li>
     <li class="navbar_search"><input [(ngModel)]="searchInput" placeholder="Search..." (focusout)="typeSearch()"><button (click)="typeSearch()">Go!</button></li>
     <li class="navbar_en"><a>|</a></li>
 

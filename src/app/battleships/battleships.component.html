@@ -1,0 +1,19 @@
+<h1>Battelships</h1>
+<hr>
+<div id="bs_cont_bg">
+  <h1>Find the most Yeetabix battleships!</h1>
+  <div class="scoreborad">
+    <button (click)="fieldsFill()">Start!</button>
+    <p>Score: {{score}}</p>
+    <p>Shots fired: {{steps}}</p>
+    <p>Shots wasted: {{steps - score}}</p>
+    <button (click)="debug()">Debug</button>
+  </div>
+  <div id="grid_container">
+    <ng-container *ngFor="let column of cField; let y = index">
+      <div class="gamefield_tile" [attr.data-value]="cField[x][y]" (click)="reveal(x, y)" *ngFor="let string of column; let x = index"><p style="display: none;"></p></div>
+    </ng-container>
+  </div>
+
+
+</div>

@@ -1,0 +1,52 @@
+#bs_cont_bg {
+  background-image: url('../../assets/water.jpg');
+  background-repeat: repeat;
+  width: 100%;
+  min-height: 100vh;
+  margin: 20px 0px;
+}
+
+#grid_container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+  justify-content: start;
+  padding-left: 20%;
+  padding-top: 10px;
+}
+
+.gamefield_tile {
+  padding: 10px;
+  background-image: url('../../assets/what.png');
+  background-size: 70px 70px;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+}
+
+.gamefield_tile[data-value="boat"] {
+  background-image: url('../../assets/yeetabix.png');
+  background-size: 70px 70px;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+}
+
+.gamefield_tile[data-value="water"] {
+  background-image: url('../../assets/water.png');
+  background-size: 70px 70px;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+}
+
+.gamefield_tile:hover {
+  cursor: pointer;
+}
+
+.scoreborad {
+  background: #ffffff;
+  box-shadow: 3px 3px 6px #1f1f1f;
+  max-width: 140px;
+  padding: 20px;
+}

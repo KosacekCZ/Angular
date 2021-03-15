@@ -5,13 +5,15 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { BlogComponent } from './blog/blog.component';
 import {RegisterComponent} from './register/register.component';
+import {BattleshipsComponent} from "./battleships/battleships.component";
 
 const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'home', component: HomeComponent},
   {path: 'blog', component: BlogComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'battleships', component: BattleshipsComponent}
 ];
 
 @NgModule({

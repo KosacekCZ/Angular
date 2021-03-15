@@ -10,13 +10,22 @@
     </ng-container>
     <br>
 
-    <input placeholder="Heslo..." [(ngModel)]="heslo" type="password" name="heslo" required minlength="10" maxlength="40" #hesloVal = "ngModel">
+    <input placeholder="Heslo:" [(ngModel)]="heslo" type="password" name="heslo" required minlength="10" maxlength="40" #hesloVal = "ngModel">
     <ng-container *ngIf="hesloVal.touched">
       <p class="errorHint" *ngIf="hesloVal.errors?.minlength">Zadané heslo je příliš krátké!</p>
       <p class="errorHint" *ngIf="hesloVal.errors?.maxlength">Zadané heslo je příliš dlouhé!</p>
       <p class="errorHint" *ngIf="hesloVal.errors?.required">Pole nesmí být prázdné!</p>
     </ng-container>
     <br>
+
+    <input placeholder="Věk:" [(ngModel)]="vek" type="number" name="vek" required min="12" max="99" #vekVal = "ngModel">
+    <ng-container *ngIf="vekVal.touched">
+      <p class="errorHint" *ngIf="vekVal.errors?.min">Zadaný věk nesplňuje minimální požadavky.</p>
+      <p class="errorHint" *ngIf="vekVal.errors?.max">Zadaný věk přesahuje maximální hodnotu.</p>
+      <p class="errorHint" *ngIf="vekVal.errors?.required">Pole nesmí být prázdné!</p>
+    </ng-container>
+    <br>
+
     <button [disabled]="formular.invalid" (click)="submit()">Regisotrovoroat!</button>
   </form>
 </div>
