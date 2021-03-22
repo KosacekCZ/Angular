@@ -1,20 +1,15 @@
-<h1>Battelships</h1>
-<hr>
 <div id="bs_cont_bg">
   <h1>Find the most Yeetabix battleships!</h1>
   <div class="scoreborad">
-    <button (click)="fieldsFill()">Start!</button>
-    <p>Score: {{score}}</p>
-    <p>Shots fired: {{steps}}</p>
-    <p>Shots wasted: {{steps - score}}</p>
-    <button (click)="debug()">Debug</button>
+    <button (click)="bs.fieldsFill()">Start!</button>
+    <p>Score: {{bs.score}}</p>
+    <p>Shots fired: {{bs.steps}}</p>
+    <p>Shots wasted: {{bs.steps - bs.score}}</p>
   </div>
-  <div *ngIf="win === false" id="grid_container">
-    <ng-container *ngFor="let column of cField; let y = index">
-      <div class="gamefield_tile" [attr.data-value]="cField[x][y]" (click)="reveal(x, y)" *ngFor="let string of column; let x = index"><p style="display: none;"></p></div>
+  <div *ngIf="bs.win === false" id="grid_container">
+    <ng-container *ngFor="let column of bs.cField; let y = index">
+      <div class="gamefield_tile" [attr.data-value]="bs.cField[x][y]" (click)="reveal(x, y)" *ngFor="let string of column; let x = index"><p style="display: none;"></p></div>
     </ng-container>
   </div>
-  <h1 *ngIf="win === true">You win xd</h1>
-
-
+  <h1 *ngIf="bs.win === true">You win xd</h1>
 </div>

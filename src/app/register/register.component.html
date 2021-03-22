@@ -18,7 +18,8 @@
     </ng-container>
     <br>
 
-    <input placeholder="Věk:" [(ngModel)]="vek" type="number" name="vek" required min="12" max="99" #vekVal = "ngModel">
+    <input placeholder="Věk:" [(ngModel)]="vek" type="number" name="vek" required appAgeVer="5" #vekVal = "ngModel">
+
     <ng-container *ngIf="vekVal.touched">
       <p class="errorHint" *ngIf="vekVal.errors?.min">Zadaný věk nesplňuje minimální požadavky.</p>
       <p class="errorHint" *ngIf="vekVal.errors?.max">Zadaný věk přesahuje maximální hodnotu.</p>
