@@ -1,15 +1,44 @@
 <div id="bs_cont_bg">
   <h1>Find the most Yeetabix battleships!</h1>
   <div class="scoreborad">
-    <button (click)="bs.fieldsFill()">Start!</button>
+    <button (click)="bs.start()">Start!</button>
     <p>Score: {{bs.score}}</p>
     <p>Shots fired: {{bs.steps}}</p>
     <p>Shots wasted: {{bs.steps - bs.score}}</p>
   </div>
-  <div *ngIf="bs.win === false" id="grid_container">
-    <ng-container *ngFor="let column of bs.cField; let y = index">
-      <div class="gamefield_tile" [attr.data-value]="bs.cField[x][y]" (click)="reveal(x, y)" *ngFor="let string of column; let x = index"><p style="display: none;"></p></div>
-    </ng-container>
+
+  <div *ngIf="bs.started === true" id="inventory">
+    <p>Inventory:</p>
+    <button [disabled]="bs.ships == 0" (click)="bs.selected = 'ship'">Ships: {{bs.ships}}</button><br><br>
+    <button [disabled]="bs.cruisers == 0" (click)="bs.selected = 'cruiser'">Cruisers: {{bs.cruisers}}</button><br><br>
+    <button [disabled]="bs.destroyers == 0" (click)="bs.selected = 'destroyer'">Destroyers: {{bs.destroyers}}</button><br><br>
+
   </div>
+
+  <h1 *ngIf="bs.started === true" id="enemak_header">Enemák</h1>
+
+  <div *ngIf="bs.started === true" id="grid_container">
+    <div class="grid_container_inner">
+      <ng-container *ngFor="let column of bs.enemyField; let y = index">
+        <div class="gamefield_tile" [attr.data-value]="bs.enemyField[x][y].type"
+             [attr.data-state]="bs.enemyField[x][y].hit" (click)="reveal(x, y)"
+             *ngFor="let battleshipsType of column; let x = index"><p style="display: none;"></p></div>
+      </ng-container>
+    </div>
+  </div>
+
+  <h1 *ngIf="bs.started === true" id="ty_header">Ty</h1>
+
+  <div *ngIf="bs.win === false" id="grid_container_2">
+    <div class="grid_container_inner">
+      <ng-container *ngFor="let column of bs.yourField; let y = index">
+        <div class="gamefield_tile" [attr.data-value]="bs.yourField[x][y].type"
+             [attr.data-state]="bs.yourField[x][y].hit" (click)="place(x, y)" *ngFor="let battleshipsType of column; let x = index"><p
+          style="display: none;"></p></div>
+      </ng-container>
+    </div>
+  </div>
+
   <h1 *ngIf="bs.win === true">You win xd</h1>
+  <img id="start_banner" *ngIf="bs.started === false" src="../../assets/start.gif" height="78" width="613"/>
 </div>

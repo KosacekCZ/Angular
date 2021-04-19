@@ -1,5 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {BattleshipsService} from '../battleships.service';
+import {type} from './battleships.type';
 
 @Component({
   selector: 'app-battleships',
@@ -8,21 +9,37 @@ import {BattleshipsService} from '../battleships.service';
 
 })
 export class BattleshipsComponent implements OnInit {
-  constructor(bs: BattleshipsService) {this.bs = bs;}
+  constructor(bs: BattleshipsService) {
+    this.bs = bs;
+  }
+
   public bs: BattleshipsService;
 
 // angular gloryhole
 
   // odhaleni policka
+
+  place(x: number, y: number): void {
+    if (this.bs.placedShips < 6) {
+      this.bs.yourField[x][y]
+    } else {
+      console.log("Exceed placed ships ammount");
+    }
+  }
+
   reveal(x: number, y: number): void {
-    if (!new RegExp('boat|water').test(this.bs.cField[x][y])) {
-      this.bs.steps++;
+    if (this.bs.placed == true) {
+      if (this.bs.enemyField[x][y].type != 1 && this.bs.enemyField[x][y].hit == false) {
+        this.bs.steps++;
+      } else if (this.bs.enemyField[x][y].type == 1 && this.bs.enemyField[x][y].hit == false) {
+        this.bs.steps++;
+        this.bs.score++;
+      }
+      this.bs.enemyField[x][y].hit = true;
+      this.check();
+    } else {
+      console.log('Nedokončené pokládání');
     }
-    if (this.bs.gameField[x][y] === 'boat' && this.bs.cField[x][y] !== 'boat') {
-      this.bs.score++;
-    }
-    this.bs.cField[x][y] = this.bs.gameField[x][y];
-    this.check();
   }
 
   check(): void {
@@ -31,9 +48,8 @@ export class BattleshipsComponent implements OnInit {
     }
   }
 
-  ngOnInit()
-    :
-    void {
+  ngOnInit(): void {
+
   }
 
 }
