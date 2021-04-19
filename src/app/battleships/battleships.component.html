@@ -9,9 +9,10 @@
 
   <div *ngIf="bs.started === true" id="inventory">
     <p>Inventory:</p>
-    <button [disabled]="bs.ships == 0" (click)="bs.selected = 'ship'">Ships: {{bs.ships}}</button><br><br>
-    <button [disabled]="bs.cruisers == 0" (click)="bs.selected = 'cruiser'">Cruisers: {{bs.cruisers}}</button><br><br>
-    <button [disabled]="bs.destroyers == 0" (click)="bs.selected = 'destroyer'">Destroyers: {{bs.destroyers}}</button><br><br>
+    <button [disabled]="bs.ships <= 0" (click)="bs.selected = 'ship'">Ships: {{bs.ships}}</button><br><br>
+    <button [disabled]="bs.cruisers <= 0" (click)="bs.selected = 'cruiser'">Cruisers: {{bs.cruisers}}</button><br><br>
+    <button [disabled]="bs.destroyers <= 0" (click)="bs.selected = 'destroyer'">Destroyers: {{bs.destroyers}}</button><br><br>
+    <button class="rotation_button" (click)="bs.rotation = !bs.rotation">Rotate (<ng-container *ngIf="bs.rotation == true"> -- </ng-container><ng-container *ngIf="bs.rotation == false"> | </ng-container>)</button>
 
   </div>
 
@@ -32,8 +33,7 @@
   <div *ngIf="bs.win === false" id="grid_container_2">
     <div class="grid_container_inner">
       <ng-container *ngFor="let column of bs.yourField; let y = index">
-        <div class="gamefield_tile" [attr.data-value]="bs.yourField[x][y].type"
-             [attr.data-state]="bs.yourField[x][y].hit" (click)="place(x, y)" *ngFor="let battleshipsType of column; let x = index"><p
+        <div class="playerfield_tile" [attr.data-value]="bs.yourField[x][y].type" (click)="place(x, y)" *ngFor="let battleshipsType of column; let x = index"><p
           style="display: none;"></p></div>
       </ng-container>
     </div>

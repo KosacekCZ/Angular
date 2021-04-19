@@ -12,7 +12,6 @@ export class BattleshipsService {
   public enemyField: BattleshipsType[][] = [];
   public yourField: BattleshipsType[][] = [];
   public size = 10;
-  public label = '';
   public x: any;
   public y: any;
   public score = 0;
@@ -20,17 +19,20 @@ export class BattleshipsService {
   public spawnedShips = 0;
   public win = false;
   public placed = false;
-  public placedShips = 0;
   public ships = 2;
   public cruisers = 2;
   public destroyers = 2;
   public started = false;
   public selected = 'empty';
+  public rotation = false;
 
   start(): void {
     this.started = true;
     this.fieldsFill();
     this.spawnBoats();
+    this.ships = 2;
+    this.cruisers = 2;
+    this.destroyers = 2;
   }
 
   rint(max: number): number {
@@ -66,17 +68,11 @@ export class BattleshipsService {
       this.yourField[i] = [];
       for (j = 0; j < this.size; j++) {
         this.enemyField[i][j] = new BattleshipsType();
-        this.enemyField[i][j].hit = false;
 
         this.yourField[i][j] = new BattleshipsType();
-        this.yourField[i][j].hit = false;
 
       }
     }
     console.log(this.enemyField);
-  }
-
-  bsAI(): void {
-
   }
 }
