@@ -1,6 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {BattleshipsService} from '../battleships.service';
 import {type} from './battleships.type';
+import {BattleshipsPlacement} from './battleships.placement';
 
 @Component({
   selector: 'app-battleships',
@@ -9,82 +10,59 @@ import {type} from './battleships.type';
 
 })
 export class BattleshipsComponent implements OnInit {
-  constructor(bs: BattleshipsService) {
+  constructor(bs: BattleshipsService, ps: BattleshipsPlacement) {
     this.bs = bs;
+    this.ps = ps;
   }
 
   public bs: BattleshipsService;
+  public ps: BattleshipsPlacement;
 
-  aiAttack(): void {
-
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  place(x: number, y: number): void {
-    if (this.bs.placed == false) {
-      if (this.bs.selected == 'ship' && this.bs.ships > 0) {
-        if (this.bs.rotation) {
-          this.bs.yourField[x][y].type = 1;
-          this.bs.yourField[x + 1][y].type = 1;
-        } else {
-          this.bs.yourField[x][y].type = 1;
-          this.bs.yourField[x][y + 1].type = 1;
+  async aiAttack(): Promise<void> {
+    await this.delay(1500);
+    this.attackPlayer(this.bs.rint(9), this.bs.rint(9));
+  }
+
+  attackEnemy(x: number, y: number): void {
+    if (this.bs.turn === 'player') {
+      if (this.ps.placed == true) {
+        if (this.bs.enemyField[x][y].type != 1 && this.bs.enemyField[x][y].hit == false) {
+          this.bs.steps++;
+        } else if (this.bs.enemyField[x][y].type == 1 && this.bs.enemyField[x][y].hit == false) {
+          this.bs.steps++;
+          this.bs.score++;
         }
-        this.bs.ships--;
-        this.bs.placedShips++;
-      } else if (this.bs.selected == 'cruiser' && this.bs.cruisers > 0) {
-        if (this.bs.rotation) {
-          this.bs.yourField[x][y].type = 1;
-          this.bs.yourField[x + 1][y].type = 1;
-          this.bs.yourField[x + 2][y].type = 1;
-        } else {
-          this.bs.yourField[x][y].type = 1;
-          this.bs.yourField[x][y + 1].type = 1;
-          this.bs.yourField[x][y + 2].type = 1;
-        }
-        this.bs.cruisers--;
-        this.bs.placedShips++;
-      } else if (this.bs.selected == 'destroyer' && this.bs.destroyers > 0) {
-        if (this.bs.rotation) {
-          this.bs.yourField[x][y].type = 1;
-          this.bs.yourField[x + 1][y].type = 1;
-          this.bs.yourField[x + 2][y].type = 1;
-          this.bs.yourField[x + 3][y].type = 1;
-        } else {
-          this.bs.yourField[x][y].type = 1;
-          this.bs.yourField[x][y + 1].type = 1;
-          this.bs.yourField[x][y + 2].type = 1;
-          this.bs.yourField[x][y + 3].type = 1;
-        }
-        this.bs.destroyers--;
-        this.bs.placedShips++;
+        this.bs.enemyField[x][y].hit = true;
+        this.bs.turn = 'enemy';
+        this.check();
+        this.aiAttack();
+      } else {
+        console.log('Nedokončené pokládání');
       }
-      console.log(this.bs.placedShips);
-    } else {
-      console.log('Exceed placed ships ammount');
-    }
-    if (this.bs.ships == 0 && this.bs.cruisers == 0 && this.bs.destroyers == 0) {
-      this.bs.placed = true;
     }
   }
 
-  reveal(x: number, y: number): void {
-    if (this.bs.placed == true) {
-      if (this.bs.enemyField[x][y].type != 1 && this.bs.enemyField[x][y].hit == false) {
-        this.bs.steps++;
-      } else if (this.bs.enemyField[x][y].type == 1 && this.bs.enemyField[x][y].hit == false) {
-        this.bs.steps++;
-        this.bs.score++;
+  attackPlayer(x: number, y: number): void {
+    if (this.bs.turn === 'enemy') {
+      if (this.bs.yourField[x][y].type == 1) {
+        this.ps.playerSpawnedShips--;
+      } else {
+        console.log('miss');
       }
-      this.bs.enemyField[x][y].hit = true;
+      this.bs.yourField[x][y].hit = true;
+      this.bs.turn = 'player';
       this.check();
-      this.aiAttack();
-    } else {
-      console.log('Nedokončené pokládání');
     }
   }
 
   check(): void {
-    if (this.bs.spawnedShips === this.bs.score) {
+    if (this.ps.enemyShips === this.bs.score) {
+      this.bs.win = true;
+    } else if (this.ps.playerSpawnedShips <= 0) {
       this.bs.win = true;
     }
   }
